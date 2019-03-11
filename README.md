@@ -1,2 +1,2 @@
 # Robots
-The project to learn OO design concepts and MDI application development in Java
+Переделываем проектик на Java в рамках курса по ООП :)
