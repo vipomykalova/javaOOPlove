@@ -23,18 +23,19 @@ public class GameVisualizer extends JPanel
         return timer;
     }
     
-    private volatile double m_robotPositionX = 100;
-    private volatile double m_robotPositionY = 100; 
-    private volatile double m_robotDirection = 0; 
+    private volatile double m_robotPositionX;
+    private volatile double m_robotPositionY;
+    private volatile double m_robotDirection;
 
-    private volatile int m_targetPositionX = 150;
-    private volatile int m_targetPositionY = 100;
+    private volatile int m_targetPositionX;
+    private volatile int m_targetPositionY;
     
     private static final double maxVelocity = 0.1;
     private static final double maxAngularVelocity = 0.001;
 
     public GameVisualizer() 
     {
+        setStartPosition();
         m_timer.schedule(new TimerTask()
         {
             @Override
@@ -63,6 +64,15 @@ public class GameVisualizer extends JPanel
         setDoubleBuffered(true);
     }
 
+    protected void setStartPosition() {
+
+        m_robotPositionX = 100;
+        m_robotPositionY = 100;
+        m_robotDirection = 0;
+        m_targetPositionX = 150;
+        m_targetPositionY = 100;
+    }
+
     protected void setTargetPosition(Point p)
     {
         m_targetPositionX = p.x;
@@ -89,32 +99,33 @@ public class GameVisualizer extends JPanel
         return asNormalizedRadians(Math.atan2(diffY, diffX));
     }
 
-    private void distanceToBoarder(double x, double y, double direction) {
+    private void checkDistanceToBoarder(double x, double y, double direction) {
 
         double distToLeftBoarder = x - Math.abs(Math.cos(direction))*15;
         double distToUpBoarder = y - Math.abs(Math.sin(direction))*15;
         double distToRightBoarder = x + Math.abs(Math.cos(direction))*15;
         double distToDownBoarder = y + Math.abs(Math.sin(direction))*15;
+
         if (super.getSize().width !=0 && super.getSize().height !=0){
+
             if ((distToLeftBoarder <=0 || distToLeftBoarder >= super.getSize().width) ||
                     (distToRightBoarder <= 0 || distToRightBoarder >= super.getSize().width) ||
                     (distToDownBoarder <=0 || distToDownBoarder >= super.getSize().height) ||
                     (distToUpBoarder <=0 || distToUpBoarder >= super.getSize().height)) {
+
                 JOptionPane.showConfirmDialog(super.getParent(),
                         "Кликни, если хочешь еще поиграть :)",
                         "RIP жучок", JOptionPane.DEFAULT_OPTION);
-                m_robotPositionX = 100;
-                m_robotPositionY = 100;
-                m_robotDirection = 0;
-                m_targetPositionX = 150;
-                m_targetPositionY = 100;
+                setStartPosition();
+
             }
         }
     }
     
     protected void onModelUpdateEvent()
     {
-        distanceToBoarder(m_robotPositionX, m_robotPositionY, m_robotDirection);
+        checkDistanceToBoarder(m_robotPositionX, m_robotPositionY, m_robotDirection);
+
         double distance = distance(m_targetPositionX, m_targetPositionY, 
             m_robotPositionX, m_robotPositionY);
         if (distance < 0.7)
@@ -124,8 +135,8 @@ public class GameVisualizer extends JPanel
         double velocity = maxVelocity;
         double angleToTarget = angleTo(m_robotPositionX, m_robotPositionY, m_targetPositionX, m_targetPositionY);
         double angularVelocity = 0;
-        double angle = asNormalizedRadians(angleToTarget - m_robotDirection);
-        if (angle < Math.PI) {
+        double angleBetweenTargetRobot = asNormalizedRadians(angleToTarget - m_robotDirection);
+        if (angleBetweenTargetRobot < Math.PI) {
             angularVelocity = maxAngularVelocity;
         }
         else {
