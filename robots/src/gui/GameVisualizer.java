@@ -16,24 +16,27 @@ import javax.swing.*;
 public class GameVisualizer extends JPanel
 {
     private final Timer m_timer = initTimer();
-    
-    private static Timer initTimer() 
+
+    private static Timer initTimer()
     {
         Timer timer = new Timer("events generator", true);
         return timer;
     }
-    
-    private volatile double m_robotPositionX;
-    private volatile double m_robotPositionY;
-    private volatile double m_robotDirection;
 
-    private volatile int m_targetPositionX;
-    private volatile int m_targetPositionY;
-    
+    public volatile double m_robotPositionX;
+    public volatile double m_robotPositionY;
+    public volatile double m_robotDirection;
+
+    public volatile int m_targetPositionX;
+    public volatile int m_targetPositionY;
+
+    public volatile double currentWidth;
+    public volatile double currentHeight;
+
     private static final double maxVelocity = 0.1;
     private static final double maxAngularVelocity = 0.001;
 
-    public GameVisualizer() 
+    public GameVisualizer()
     {
         setStartPosition();
         m_timer.schedule(new TimerTask()
@@ -64,6 +67,7 @@ public class GameVisualizer extends JPanel
         setDoubleBuffered(true);
     }
 
+
     protected void setStartPosition() {
 
         m_robotPositionX = 100;
@@ -78,7 +82,7 @@ public class GameVisualizer extends JPanel
         m_targetPositionX = p.x;
         m_targetPositionY = p.y;
     }
-    
+
     protected void onRedrawEvent()
     {
         EventQueue.invokeLater(this::repaint);
@@ -90,44 +94,48 @@ public class GameVisualizer extends JPanel
         double diffY = y1 - y2;
         return Math.sqrt(diffX * diffX + diffY * diffY);
     }
-    
+
     private static double angleTo(double fromX, double fromY, double toX, double toY)
     {
         double diffX = toX - fromX;
         double diffY = toY - fromY;
-        
+
         return asNormalizedRadians(Math.atan2(diffY, diffX));
     }
 
-    private void checkDistanceToBoarder(double x, double y, double direction) {
+    public boolean isRobotAbroad(double x, double y, double direction) {
 
         double distToLeftBoarder = x - Math.abs(Math.cos(direction))*15;
         double distToUpBoarder = y - Math.abs(Math.sin(direction))*15;
         double distToRightBoarder = x + Math.abs(Math.cos(direction))*15;
         double distToDownBoarder = y + Math.abs(Math.sin(direction))*15;
 
-        if (super.getSize().width !=0 && super.getSize().height !=0){
+        if (currentWidth !=0 && currentHeight !=0){
 
-            if ((distToLeftBoarder <=0 || distToLeftBoarder >= super.getSize().width) ||
-                    (distToRightBoarder <= 0 || distToRightBoarder >= super.getSize().width) ||
-                    (distToDownBoarder <=0 || distToDownBoarder >= super.getSize().height) ||
-                    (distToUpBoarder <=0 || distToUpBoarder >= super.getSize().height)) {
+            if ((distToLeftBoarder <=0 || distToLeftBoarder >= currentWidth) ||
+                    (distToRightBoarder <= 0 || distToRightBoarder >= currentWidth) ||
+                    (distToDownBoarder <=0 || distToDownBoarder >= currentHeight) ||
+                    (distToUpBoarder <=0 || distToUpBoarder >= currentHeight)) {
 
                 JOptionPane.showConfirmDialog(super.getParent(),
                         "Кликни, если хочешь еще поиграть :)",
                         "RIP жучок", JOptionPane.DEFAULT_OPTION);
-                setStartPosition();
-
+                return true;
             }
         }
+        return false;
     }
-    
-    protected void onModelUpdateEvent()
-    {
-        checkDistanceToBoarder(m_robotPositionX, m_robotPositionY, m_robotDirection);
 
-        double distance = distance(m_targetPositionX, m_targetPositionY, 
-            m_robotPositionX, m_robotPositionY);
+    public void onModelUpdateEvent()
+    {
+        currentWidth = super.getSize().width;
+        currentHeight = super.getSize().height;
+        if (isRobotAbroad(m_robotPositionX, m_robotPositionY, m_robotDirection)) {
+            setStartPosition();
+        }
+
+        double distance = distance(m_targetPositionX, m_targetPositionY,
+                m_robotPositionX, m_robotPositionY);
         if (distance < 0.7)
         {
             return;
@@ -157,7 +165,7 @@ public class GameVisualizer extends JPanel
             }
         }
     }
-    
+
     private void moveRobot(double velocity, double angularVelocity, double duration)
     {
         double newX = m_robotPositionX + velocity * duration * Math.cos(m_robotDirection);
@@ -181,36 +189,36 @@ public class GameVisualizer extends JPanel
         }
         return angle;
     }
-    
+
     private static int round(double value)
     {
         return (int)(value + 0.5);
     }
-    
+
     @Override
     public void paint(Graphics g)
     {
         super.paint(g);
-        Graphics2D g2d = (Graphics2D)g; 
+        Graphics2D g2d = (Graphics2D)g;
         drawRobot(g2d, round(m_robotPositionX), round(m_robotPositionY), m_robotDirection);
         drawTarget(g2d, m_targetPositionX, m_targetPositionY);
     }
-    
+
     private static void fillOval(Graphics g, int centerX, int centerY, int diam1, int diam2)
     {
         g.fillOval(centerX - diam1 / 2, centerY - diam2 / 2, diam1, diam2);
     }
-    
+
     private static void drawOval(Graphics g, int centerX, int centerY, int diam1, int diam2)
     {
         g.drawOval(centerX - diam1 / 2, centerY - diam2 / 2, diam1, diam2);
     }
-    
+
     private void drawRobot(Graphics2D g, int x, int y, double direction)
     {
-        int robotCenterX = round(m_robotPositionX); 
+        int robotCenterX = round(m_robotPositionX);
         int robotCenterY = round(m_robotPositionY);
-        AffineTransform t = AffineTransform.getRotateInstance(direction, robotCenterX, robotCenterY); 
+        AffineTransform t = AffineTransform.getRotateInstance(direction, robotCenterX, robotCenterY);
         g.setTransform(t);
         g.setColor(Color.MAGENTA);
         fillOval(g, robotCenterX, robotCenterY, 30, 10);
@@ -221,10 +229,10 @@ public class GameVisualizer extends JPanel
         g.setColor(Color.BLACK);
         drawOval(g, robotCenterX  + 10, robotCenterY, 5, 5);
     }
-    
+
     private void drawTarget(Graphics2D g, int x, int y)
     {
-        AffineTransform t = AffineTransform.getRotateInstance(0, 0, 0); 
+        AffineTransform t = AffineTransform.getRotateInstance(0, 0, 0);
         g.setTransform(t);
         g.setColor(Color.GREEN);
         fillOval(g, x, y, 5, 5);
