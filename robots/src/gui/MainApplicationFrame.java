@@ -1,13 +1,8 @@
 package gui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.awt.event.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -169,7 +164,7 @@ public class MainApplicationFrame extends JFrame
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String fileName = "src//saves//"+ textField.getText() + ".txt";
+                String fileName = "robots//src//saves//"+ textField.getText() + ".txt";
                 File file = new File(fileName);
                 try {
                     file.createNewFile();
@@ -207,12 +202,12 @@ public class MainApplicationFrame extends JFrame
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String fileName = "src//saves//"+ textField.getText() + ".txt";
+                String fileName = "robots//src//saves//"+ textField.getText() + ".txt";
                 try {
                     FileReader reader = new FileReader(fileName);
                     Scanner scan = new Scanner(reader);
                     ArrayList<String> gameState = new ArrayList<String>();
-                    while (scan.hasNextLine()){
+                    while (scan.hasNextLine()) {
                         gameState.add(scan.nextLine());
                     }
                     reader.close();
@@ -223,9 +218,13 @@ public class MainApplicationFrame extends JFrame
                     int tY = Integer.parseInt(gameState.get(4));
                     gameWindow.getVisualizer().setPosition(rX, rY, dir, tX, tY);
                     desktopPane.remove(saveWindow);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
+                }catch (FileNotFoundException e2) {
+                    JOptionPane.showMessageDialog(saveWindow, "Файла с таким именем нет!",
+                            "Ошибка загрузки", JOptionPane.WARNING_MESSAGE);
                 }
+                catch (IOException e1) {
+                    e1.printStackTrace();
+            }
             }
         });
 
