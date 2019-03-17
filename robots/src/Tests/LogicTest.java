@@ -7,14 +7,14 @@ import gui.GameVisualizer;
 public class LogicTest {
     private GameVisualizer game = new GameVisualizer();
     @Test
-    void DefaultTest(){
+    void defaultTest(){
         game.m_robotPositionX = 150.8;
         game.onModelUpdateEvent();
         assertEquals(game.m_robotPositionX, 150.8);
     }
 
     @Test
-    void RunDirectTest(){
+    void runDirectTest(){
         game.m_robotPositionX = 100;
         game.m_robotPositionY = 100;
         game.m_robotDirection = 0;
@@ -25,7 +25,7 @@ public class LogicTest {
     }
 
     @Test
-    void RunNoDirectTest(){
+    void runNoDirectTest(){
         game.m_robotDirection = 3.1415926;
         game.m_robotPositionY = 90;
         game.m_robotPositionX = 90;
@@ -35,14 +35,14 @@ public class LogicTest {
     }
 
     @Test
-    void RunBorderTest(){
+    void runBorderTest(){
         game.currentHeight = 50;
         game.currentWidth = 20;
         assertTrue(game.isRobotAbroad(10, 20, 0.1));
     }
 
     @Test
-    void RunNoBorderTest(){
+    void runNoBorderTest(){
         game.currentHeight = 50;
         game.currentWidth = 20;
         assertFalse(game.isRobotAbroad(10, 20, 1.6));
