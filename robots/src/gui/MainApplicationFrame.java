@@ -1,18 +1,17 @@
 package gui;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
 
 import log.Logger;
 
@@ -25,7 +24,7 @@ import log.Logger;
 public class MainApplicationFrame extends JFrame
 {
     private final JDesktopPane desktopPane = new JDesktopPane();
-    
+    private GameWindow gameWindow;
     public MainApplicationFrame() {
         //Make the big window be indented 50 pixels from each edge
         //of the screen.
@@ -41,7 +40,7 @@ public class MainApplicationFrame extends JFrame
         LogWindow logWindow = createLogWindow();
         addWindow(logWindow);
 
-        GameWindow gameWindow = new GameWindow();
+        gameWindow = new GameWindow();
         gameWindow.setSize(400,  400);
         addWindow(gameWindow);
 
@@ -135,11 +134,108 @@ public class MainApplicationFrame extends JFrame
             testMenu.add(addLogMessageItem);
         }
 
+        JMenu saveMenu = new JMenu("Сохранить/Загрузить");
+        saveMenu.setMnemonic(KeyEvent.VK_T);
+        {
+            JMenuItem save = new JMenuItem("Сохранить", KeyEvent.VK_S);
+            save.addActionListener((event) -> {
+                addWindow(createSaveWindow());
+            });
+            saveMenu.add(save);
+        }
+        {
+            JMenuItem load = new JMenuItem("Загрузить", KeyEvent.VK_S);
+            load.addActionListener((event) -> {
+                addWindow(createLoadWindow());
+            });
+            saveMenu.add(load);
+        }
+
         menuBar.add(lookAndFeelMenu);
         menuBar.add(testMenu);
+        menuBar.add(saveMenu);
         return menuBar;
     }
-    
+
+    private JInternalFrame createSaveWindow(){
+        JInternalFrame saveWindow = new JInternalFrame("Введите название", false, false,false,false);
+        saveWindow.setLocation(10,10);
+        saveWindow.setSize(300, 100);
+
+        JPanel panel = new JPanel(new BorderLayout());
+        JTextField textField = new JTextField();
+        JButton button = new JButton("Сохранить");
+
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String fileName = "src//saves//"+ textField.getText() + ".txt";
+                File file = new File(fileName);
+                try {
+                    file.createNewFile();
+                    FileWriter writer = new FileWriter(fileName, false);
+                    ArrayList<String> state = gameWindow.getVisualizer().getGameState();
+                    for(int i = 0; i < state.size(); i++){
+                        writer.write(state.get(i));
+                        writer.write("\n");
+                    }
+                    writer.flush();
+                    writer.close();
+                    desktopPane.remove(saveWindow);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        panel.add(button, BorderLayout.SOUTH);
+        panel.add(textField, BorderLayout.NORTH);
+        saveWindow.add(panel);
+        return saveWindow;
+
+    }
+
+    private JInternalFrame createLoadWindow(){
+        JInternalFrame saveWindow = new JInternalFrame("Введите название", false, false,false,false);
+        saveWindow.setLocation(10,10);
+        saveWindow.setSize(300, 100);
+
+        JPanel panel = new JPanel(new BorderLayout());
+        JTextField textField = new JTextField();
+        JButton button = new JButton("Загрузить");
+
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String fileName = "src//saves//"+ textField.getText() + ".txt";
+                try {
+                    FileReader reader = new FileReader(fileName);
+                    Scanner scan = new Scanner(reader);
+                    ArrayList<String> gameState = new ArrayList<String>();
+                    while (scan.hasNextLine()){
+                        gameState.add(scan.nextLine());
+                    }
+                    reader.close();
+                    double rX = Double.parseDouble(gameState.get(0));
+                    double rY = Double.parseDouble(gameState.get(1));
+                    double dir = Double.parseDouble(gameState.get(2));
+                    int tX = Integer.parseInt(gameState.get(3));
+                    int tY = Integer.parseInt(gameState.get(4));
+                    gameWindow.getVisualizer().setPosition(rX, rY, dir, tX, tY);
+                    desktopPane.remove(saveWindow);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        panel.add(button, BorderLayout.SOUTH);
+        panel.add(textField, BorderLayout.NORTH);
+        saveWindow.add(panel);
+        return saveWindow;
+
+    }
+
     private void setLookAndFeel(String className)
     {
         try

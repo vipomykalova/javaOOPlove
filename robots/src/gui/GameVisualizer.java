@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -67,6 +68,16 @@ public class GameVisualizer extends JPanel
         setDoubleBuffered(true);
     }
 
+    public ArrayList<String> getGameState(){
+        ArrayList<String> gameState = new ArrayList<String>();
+        gameState.add(String.valueOf(m_robotPositionX));
+        gameState.add(String.valueOf(m_robotPositionY));
+        gameState.add(String.valueOf(m_robotDirection));
+        gameState.add(String.valueOf(m_targetPositionX));
+        gameState.add(String.valueOf(m_targetPositionY));
+        return gameState;
+
+    }
 
     protected void setStartPosition() {
 
@@ -75,6 +86,15 @@ public class GameVisualizer extends JPanel
         m_robotDirection = 0;
         m_targetPositionX = 150;
         m_targetPositionY = 100;
+    }
+
+    public void setPosition(double rX, double rY, double dir, int tX, int tY) {
+
+        m_robotPositionX = rX;
+        m_robotPositionY = rY;
+        m_robotDirection = dir;
+        m_targetPositionX = tX;
+        m_targetPositionY = tY;
     }
 
     protected void setTargetPosition(Point p)
