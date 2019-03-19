@@ -16,7 +16,7 @@ import javax.swing.*;
 
 public class GameVisualizer extends JPanel
 {
-    private final Timer m_timer = initTimer();
+    private Timer m_timer = initTimer();
 
     private static Timer initTimer()
     {
@@ -66,6 +66,31 @@ public class GameVisualizer extends JPanel
             }
         });
         setDoubleBuffered(true);
+    }
+
+    public void stopTimer(){
+        m_timer.cancel();
+        onRedrawEvent();
+        m_timer = initTimer();
+    }
+
+    public void setTimer(){
+        m_timer.schedule(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                onRedrawEvent();
+            }
+        }, 0, 50);
+        m_timer.schedule(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                onModelUpdateEvent();
+            }
+        }, 0, 10);
     }
 
     public ArrayList<String> getGameState(){

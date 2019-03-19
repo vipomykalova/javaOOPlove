@@ -153,6 +153,7 @@ public class MainApplicationFrame extends JFrame
     }
 
     private JInternalFrame createSaveWindow(){
+        gameWindow.getVisualizer().stopTimer();
         JInternalFrame saveWindow = new JInternalFrame("Введите название", false, false,false,false);
         saveWindow.setLocation(10,10);
         saveWindow.setSize(300, 100);
@@ -177,6 +178,7 @@ public class MainApplicationFrame extends JFrame
                     writer.flush();
                     writer.close();
                     desktopPane.remove(saveWindow);
+                    gameWindow.getVisualizer().setTimer();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
