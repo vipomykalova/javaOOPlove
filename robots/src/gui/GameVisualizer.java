@@ -17,6 +17,7 @@ import javax.swing.*;
 public class GameVisualizer extends JPanel
 {
     private Timer m_timer = initTimer();
+    Boolean isEditor = false;
 
     private static Timer initTimer()
     {
@@ -24,15 +25,15 @@ public class GameVisualizer extends JPanel
         return timer;
     }
 
-    public volatile double m_robotPositionX;
-    public volatile double m_robotPositionY;
-    public volatile double m_robotDirection;
+    volatile double m_robotPositionX;
+    volatile double m_robotPositionY;
+    volatile double m_robotDirection;
 
-    public volatile int m_targetPositionX;
-    public volatile int m_targetPositionY;
+    volatile int m_targetPositionX;
+    volatile int m_targetPositionY;
 
-    public volatile double currentWidth;
-    public volatile double currentHeight;
+    volatile double currentWidth;
+    volatile double currentHeight;
 
     private static final double maxVelocity = 0.1;
     private static final double maxAngularVelocity = 0.001;
@@ -63,6 +64,23 @@ public class GameVisualizer extends JPanel
             {
                 setTargetPosition(e.getPoint());
                 repaint();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (isEditor) {
+                    m_robotPositionX = e.getX();
+                    m_robotPositionY = e.getY();
+                    repaint();
+                }
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (isEditor) {
+                    m_robotPositionX = e.getX();
+                    m_robotPositionY = e.getY();
+                    repaint();
+                }
             }
         });
         setDoubleBuffered(true);
