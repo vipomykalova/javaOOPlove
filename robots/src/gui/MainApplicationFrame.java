@@ -155,6 +155,7 @@ public class MainApplicationFrame extends JFrame
     private JInternalFrame createSaveWindow(){
         gameWindow.getVisualizer().stopTimer();
         gameWindow.getVisualizer().isEditor = true;
+        ArrayList<String> state_before_save = gameWindow.getVisualizer().getGameState();
         JInternalFrame saveWindow = new JInternalFrame("Введите название", false, true,false,false);
         saveWindow.setLocation(420,0);
         saveWindow.setSize(300, 100);
@@ -166,7 +167,7 @@ public class MainApplicationFrame extends JFrame
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String fileName = "robots//src//saves//"+ textField.getText() + ".txt";
+                String fileName = "src//saves//"+ textField.getText() + ".txt";
                 File file = new File(fileName);
                 try {
                     file.createNewFile();
@@ -180,6 +181,7 @@ public class MainApplicationFrame extends JFrame
                     writer.close();
                     saveWindow.dispose();
                     gameWindow.getVisualizer().isEditor = false;
+                    gameWindow.getVisualizer().setPosition(state_before_save);
                     gameWindow.getVisualizer().setTimer();
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -206,7 +208,7 @@ public class MainApplicationFrame extends JFrame
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String fileName = "robots//src//saves//"+ textField.getText() + ".txt";
+                String fileName = "src//saves//"+ textField.getText() + ".txt";
                 try {
                     FileReader reader = new FileReader(fileName);
                     Scanner scan = new Scanner(reader);
@@ -215,12 +217,7 @@ public class MainApplicationFrame extends JFrame
                         gameState.add(scan.nextLine());
                     }
                     reader.close();
-                    double rX = Double.parseDouble(gameState.get(0));
-                    double rY = Double.parseDouble(gameState.get(1));
-                    double dir = Double.parseDouble(gameState.get(2));
-                    int tX = Integer.parseInt(gameState.get(3));
-                    int tY = Integer.parseInt(gameState.get(4));
-                    gameWindow.getVisualizer().setPosition(rX, rY, dir, tX, tY);
+                    gameWindow.getVisualizer().setPosition(gameState);
                     saveWindow.dispose();
                 }catch (FileNotFoundException e2) {
                     JOptionPane.showMessageDialog(saveWindow, "Файла с таким именем нет!",
