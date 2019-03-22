@@ -57,7 +57,7 @@ public class GameVisualizer extends JPanel {
                     setTargetPosition(e.getPoint());
                     repaint();
                 } else {
-                    if (distance(e.getX(), e.getY(), m_robotPositionX, m_targetPositionY) < 10) {
+                    if (distance(e.getX(), e.getY(), m_robotPositionX, m_robotPositionY) < 10) {
                         if (getMouseMotionListeners().length == 0)
                             addMouseMotionListener(new MouseAdapter() {
                                 @Override
