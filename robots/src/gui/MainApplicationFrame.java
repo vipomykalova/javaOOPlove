@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 
 import log.Logger;
 
@@ -155,7 +158,7 @@ public class MainApplicationFrame extends JFrame
     private JInternalFrame createSaveWindow(){
         gameWindow.getVisualizer().stopTimer();
         gameWindow.getVisualizer().isEditor = true;
-        ArrayList<String> state_before_save = gameWindow.getVisualizer().getGameState();
+        ArrayList<String> stateBeforeSave = gameWindow.getVisualizer().getGameState();
         JInternalFrame saveWindow = new JInternalFrame("Введите название", false, true,false,false);
         saveWindow.setLocation(420,0);
         saveWindow.setSize(300, 100);
@@ -164,29 +167,40 @@ public class MainApplicationFrame extends JFrame
         JTextField textField = new JTextField();
         JButton button = new JButton("Сохранить");
 
+        saveWindow.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                gameWindow.getVisualizer().isEditor = false;
+                gameWindow.getVisualizer().setPosition(stateBeforeSave);
+                gameWindow.getVisualizer().setTimer();
+
+            }
+        });
+
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String fileName = "src//saves//"+ textField.getText() + ".txt";
-                File file = new File(fileName);
-                try {
-                    file.createNewFile();
-                    FileWriter writer = new FileWriter(fileName, false);
-                    ArrayList<String> state = gameWindow.getVisualizer().getGameState();
-                    for(int i = 0; i < state.size(); i++){
-                        writer.write(state.get(i));
-                        writer.write("\n");
+                    String fileName = "robots//src//saves//"+ textField.getText() + ".txt";
+                    File file = new File(fileName);
+                    try {
+                        file.createNewFile();
+                        FileWriter writer = new FileWriter(fileName, false);
+                        ArrayList<String> state = gameWindow.getVisualizer().getGameState();
+                        for(int i = 0; i < state.size(); i++){
+                            writer.write(state.get(i));
+                            writer.write("\n");
+                        }
+                        writer.flush();
+                        writer.close();
+                        saveWindow.dispose();
+                        gameWindow.getVisualizer().isEditor = false;
+                        gameWindow.getVisualizer().setPosition(stateBeforeSave);
+                        gameWindow.getVisualizer().setTimer();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
-                    writer.flush();
-                    writer.close();
-                    saveWindow.dispose();
-                    gameWindow.getVisualizer().isEditor = false;
-                    gameWindow.getVisualizer().setPosition(state_before_save);
-                    gameWindow.getVisualizer().setTimer();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
             }
+
         });
 
         panel.add(button, BorderLayout.SOUTH);
@@ -208,7 +222,7 @@ public class MainApplicationFrame extends JFrame
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String fileName = "src//saves//"+ textField.getText() + ".txt";
+                String fileName = "robots//src//saves//"+ textField.getText() + ".txt";
                 try {
                     FileReader reader = new FileReader(fileName);
                     Scanner scan = new Scanner(reader);
@@ -217,6 +231,7 @@ public class MainApplicationFrame extends JFrame
                         gameState.add(scan.nextLine());
                     }
                     reader.close();
+                    gameWindow.setSize(Integer.parseInt(gameState.get(5)), Integer.parseInt(gameState.get(6)));
                     gameWindow.getVisualizer().setPosition(gameState);
                     saveWindow.dispose();
                 }catch (FileNotFoundException e2) {

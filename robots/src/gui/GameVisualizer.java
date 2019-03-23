@@ -107,6 +107,8 @@ public class GameVisualizer extends JPanel {
         gameState.add(String.valueOf(m_robotDirection));
         gameState.add(String.valueOf(m_targetPositionX));
         gameState.add(String.valueOf(m_targetPositionY));
+        gameState.add(String.valueOf(super.getSize().width));
+        gameState.add(String.valueOf(super.getSize().height));
         return gameState;
 
     }
@@ -127,6 +129,7 @@ public class GameVisualizer extends JPanel {
         m_robotDirection = Double.parseDouble(gameState.get(2));
         m_targetPositionX = Integer.parseInt(gameState.get(3));
         m_targetPositionY = Integer.parseInt(gameState.get(4));
+
     }
 
     protected void setTargetPosition(Point p) {
