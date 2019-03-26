@@ -22,7 +22,7 @@ import log.Logger;
 public class MainApplicationFrame extends JFrame
 {
     private final JDesktopPane desktopPane = new JDesktopPane();
-    private GameWindow gameWindow;
+    public GameWindow gameWindow;
     public MainApplicationFrame() {
         //Make the big window be indented 50 pixels from each edge
         //of the screen.
@@ -180,25 +180,7 @@ public class MainApplicationFrame extends JFrame
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    String fileName = "robots//src//saves//"+ textField.getText() + ".txt";
-                    File file = new File(fileName);
-                    try {
-                        file.createNewFile();
-                        FileWriter writer = new FileWriter(fileName, false);
-                        ArrayList<String> state = gameWindow.getVisualizer().getGameState();
-                        for(int i = 0; i < state.size(); i++){
-                            writer.write(state.get(i));
-                            writer.write("\n");
-                        }
-                        writer.flush();
-                        writer.close();
-                        saveWindow.dispose();
-                        gameWindow.getVisualizer().isEditor = false;
-                        gameWindow.getVisualizer().setPosition(stateBeforeSave);
-                        gameWindow.getVisualizer().setTimer();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+                saveState(saveWindow, textField, stateBeforeSave);
             }
 
         });
@@ -222,25 +204,7 @@ public class MainApplicationFrame extends JFrame
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String fileName = "robots//src//saves//"+ textField.getText() + ".txt";
-                try {
-                    FileReader reader = new FileReader(fileName);
-                    Scanner scan = new Scanner(reader);
-                    ArrayList<String> gameState = new ArrayList<String>();
-                    while (scan.hasNextLine()) {
-                        gameState.add(scan.nextLine());
-                    }
-                    reader.close();
-                    gameWindow.setSize(Integer.parseInt(gameState.get(5)), Integer.parseInt(gameState.get(6)));
-                    gameWindow.getVisualizer().setPosition(gameState);
-                    saveWindow.dispose();
-                }catch (FileNotFoundException e2) {
-                    JOptionPane.showMessageDialog(saveWindow, "Файла с таким именем нет!",
-                            "Ошибка загрузки", JOptionPane.WARNING_MESSAGE);
-                }
-                catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                loadState(saveWindow, textField);
             }
         });
 
@@ -249,6 +213,50 @@ public class MainApplicationFrame extends JFrame
         saveWindow.add(panel);
         return saveWindow;
 
+    }
+
+    public void saveState(JInternalFrame saveWindow, JTextField textField, ArrayList<String> stateBeforeSave){
+        String fileName = "src//saves//"+ textField.getText() + ".txt";
+        File file = new File(fileName);
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(fileName, false);
+            ArrayList<String> state = gameWindow.getVisualizer().getGameState();
+            for(int i = 0; i < state.size(); i++){
+                writer.write(state.get(i));
+                writer.write("\n");
+            }
+            writer.flush();
+            writer.close();
+            saveWindow.dispose();
+            gameWindow.getVisualizer().isEditor = false;
+            gameWindow.getVisualizer().setPosition(stateBeforeSave);
+            gameWindow.getVisualizer().setTimer();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void loadState(JInternalFrame saveWindow, JTextField textField){
+        String fileName = "src//saves//"+ textField.getText() + ".txt";
+        try {
+            FileReader reader = new FileReader(fileName);
+            Scanner scan = new Scanner(reader);
+            ArrayList<String> gameState = new ArrayList<String>();
+            while (scan.hasNextLine()) {
+                gameState.add(scan.nextLine());
+            }
+            reader.close();
+            gameWindow.setSize(Integer.parseInt(gameState.get(5)), Integer.parseInt(gameState.get(6)));
+            gameWindow.getVisualizer().setPosition(gameState);
+            saveWindow.dispose();
+        }catch (FileNotFoundException e2) {
+            JOptionPane.showMessageDialog(saveWindow, "Файла с таким именем нет!",
+                    "Ошибка загрузки", JOptionPane.WARNING_MESSAGE);
+        }
+        catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 
     private void setLookAndFeel(String className)
