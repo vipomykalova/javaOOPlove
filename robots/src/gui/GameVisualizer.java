@@ -64,7 +64,6 @@ public class GameVisualizer extends JPanel {
                                 public void mouseMoved(MouseEvent e) {
                                     m_robotPositionX = e.getX();
                                     m_robotPositionY = e.getY();
-                                    setTargetPosition(e.getPoint());
                                     repaint();
 
                                 }
@@ -123,7 +122,6 @@ public class GameVisualizer extends JPanel {
     }
 
     public void setPosition(ArrayList<String> gameState) {
-
         m_robotPositionX = Double.parseDouble(gameState.get(0));
         m_robotPositionY = Double.parseDouble(gameState.get(1));
         m_robotDirection = Double.parseDouble(gameState.get(2));
