@@ -52,23 +52,4 @@ public class LogicTest {
         game.currentWidth = 50;
         assertFalse(game.isRobotAbroad(30, 20, 0.1));
     }
-
-    @Test
-    void runSaveLoadTest(){
-        MainApplicationFrame mainFrame = new MainApplicationFrame();
-        GameVisualizer visualizer = mainFrame.gameWindow.getVisualizer();
-        JInternalFrame saveWindow = new JInternalFrame();
-        JTextField textField = new JTextField();
-        textField.setText("test");
-        visualizer.m_robotPositionX = 90;
-        visualizer.m_robotPositionY= 90;
-        visualizer.m_targetPositionX = 90;
-        visualizer.m_targetPositionY = 90;
-        mainFrame.saveState(saveWindow, textField, game.getGameState());
-        visualizer.m_targetPositionX = 150;
-        visualizer.m_targetPositionY = 150;
-        mainFrame.loadState(saveWindow, textField);
-        assertEquals(90, visualizer.m_robotPositionX);
-        assertEquals(90, visualizer.m_robotPositionX);
-    }
 }
