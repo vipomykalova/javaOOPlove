@@ -4,15 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.*;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import log.Logger;
-import sun.nio.cs.ext.EUC_JP_Open;
 
 /**
  * Что требуется сделать:
@@ -22,6 +18,7 @@ import sun.nio.cs.ext.EUC_JP_Open;
 public class MainApplicationFrame extends JFrame {
     private final JDesktopPane desktopPane = new JDesktopPane();
     public GameWindow gameWindow;
+    private SaveAndLoadGame saveLoadManager = new SaveAndLoadGame();
 
     public MainApplicationFrame() {
         //Make the big window be indented 50 pixels from each edge
@@ -132,7 +129,7 @@ public class MainApplicationFrame extends JFrame {
         JMenu saveMenu = new JMenu("Сохранить/Загрузить");
         saveMenu.setMnemonic(KeyEvent.VK_T);
         {
-            JMenuItem save = new JMenuItem("Save", KeyEvent.VK_S);
+            JMenuItem save = new JMenuItem("Сохранить", KeyEvent.VK_S);
             save.addActionListener((event) -> {
                 saveState(saveMenu);
             });
@@ -155,19 +152,21 @@ public class MainApplicationFrame extends JFrame {
     public void saveState(JMenu saveMenu) {
         gameWindow.getVisualizer().stopTimer();
         JFileChooser jFileChooser = new JFileChooser();
-        jFileChooser.setCurrentDirectory(new File("src//saves"));
+        jFileChooser.setCurrentDirectory(new File("robots//src//saves"));
         int ret = jFileChooser.showSaveDialog(saveMenu);
         if (ret == jFileChooser.APPROVE_OPTION) {
             try {
-                FileWriter fw = new FileWriter(jFileChooser.getSelectedFile() + ".txt");
-                ArrayList<String> state = gameWindow.getVisualizer().getGameState();
-                for (int i = 0; i < state.size(); i++) {
-                    fw.write(state.get(i) + " ");
+                String FileName = "";
+                if (!jFileChooser.getSelectedFile().toString().endsWith(".txt")){
+                    FileName = jFileChooser.getSelectedFile() + ".txt";
                 }
-                fw.flush();
-                fw.close();
-            } catch (Exception e) {
-
+                else {
+                    FileName = jFileChooser.getSelectedFile().toString();
+                }
+                String dataForSave = saveLoadManager.getDataForSave(gameWindow);
+                saveLoadManager.saveData(dataForSave, FileName);
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
         }
         gameWindow.getVisualizer().setTimer();
@@ -175,30 +174,25 @@ public class MainApplicationFrame extends JFrame {
 
     public void loadState(JMenu saveMenu) {
         JFileChooser jFileChooser = new JFileChooser();
-        jFileChooser.setCurrentDirectory(new File("src//saves"));
+        jFileChooser.setCurrentDirectory(new File("robots//src//saves"));
+        jFileChooser.setFileFilter(new FileNameExtensionFilter("Only text files", "txt"));
         int ret = jFileChooser.showOpenDialog(saveMenu);
         if (ret == jFileChooser.APPROVE_OPTION) {
             try {
                 File file = jFileChooser.getSelectedFile();
-                FileReader fw = new FileReader(file);
-                char[] c = new char[(int) file.length()];
-                ArrayList<String> gameState = new ArrayList<>();
-                int size = fw.read(c);
-
-                String stat = "";
-                for (int i = 0; i < size; i++) {
-                    if (c[i] == " ".charAt(0)) {
-                        gameState.add(stat);
-                        stat = "";
-                        continue;
-                    }
-                    stat = stat + c[i];
+                String loadState = saveLoadManager.getDataFromSource(file);
+                if (!saveLoadManager.setLoadData(gameWindow, loadState)) {
+                    JOptionPane.showMessageDialog(jFileChooser, "Файл повреждён!",
+                            "Ошибка загрузки", JOptionPane.WARNING_MESSAGE);
                 }
-                fw.close();
-                gameWindow.setSize(Integer.parseInt(gameState.get(5)), Integer.parseInt(gameState.get(6)));
-                gameWindow.getVisualizer().setPosition(gameState);
-            } catch (Exception e) {
 
+            } catch (FileNotFoundException e2) {
+                JOptionPane.showMessageDialog(jFileChooser, "Файла с таким именем нет!",
+                        "Ошибка загрузки", JOptionPane.WARNING_MESSAGE);
+            }
+            catch (Exception e1) {
+                JOptionPane.showMessageDialog(jFileChooser, "Файл повреждён!",
+                        "Ошибка загрузки", JOptionPane.WARNING_MESSAGE);
             }
         }
     }
