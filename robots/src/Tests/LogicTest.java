@@ -1,11 +1,9 @@
 package Tests;
-import gui.MainApplicationFrame;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import gui.GameVisualizer;
 
-import javax.swing.*;
 
 public class LogicTest {
     private GameVisualizer game = new GameVisualizer();
