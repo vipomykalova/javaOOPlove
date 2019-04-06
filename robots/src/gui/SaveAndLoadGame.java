@@ -1,6 +1,7 @@
 package gui;
 
 
+import javax.swing.table.TableRowSorter;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +16,6 @@ public class SaveAndLoadGame {
         for (int i = 0; i < currentState.size(); i++) {
             result += currentState.get(i) + " ";
         }
-
         return result;
     }
 
@@ -24,7 +24,7 @@ public class SaveAndLoadGame {
         return makeDataForSave(currentGame);
     }
 
-    private void saveDataInFile(String[] data) throws IOException{
+    private void saveDataInFile(String[] data) throws IOException {
 
         String state = data[0];
         String fileName = data[1];
@@ -34,12 +34,12 @@ public class SaveAndLoadGame {
         fw.close();
     }
 
-    public void saveData(String ... data) throws IOException{
+    public void saveData(String... data) throws IOException {
 
         saveDataInFile(data);
     }
 
-    private String getDataFromFile(File file) throws FileNotFoundException, Exception{
+    private String getDataFromFile(File file) throws FileNotFoundException, Exception {
 
         FileReader fw = new FileReader(file);
         Scanner scan = new Scanner(fw);
@@ -54,7 +54,7 @@ public class SaveAndLoadGame {
 
     }
 
-    public String getDataFromSource(Object source) throws FileNotFoundException, Exception{
+    public String getDataFromSource(Object source) throws FileNotFoundException, Exception {
 
         return getDataFromFile((File) source);
     }
@@ -65,16 +65,18 @@ public class SaveAndLoadGame {
 
         if (stateParse.length != 7) {
             return false;
-        }
-
-        else {
+        } else {
             ArrayList<String> stateInList = new ArrayList<>();
             for (int i = 0; i < stateParse.length - 2; i++) {
                 stateInList.add(stateParse[i]);
             }
 
-            currentGame.setSize(Integer.parseInt(stateParse[5]), Integer.parseInt(stateParse[6]));
-            currentGame.getVisualizer().setPosition(stateInList);
+            try {
+                currentGame.setSize(Integer.parseInt(stateParse[5]), Integer.parseInt(stateParse[6]));
+                currentGame.getVisualizer().setPosition(stateInList);
+            } catch (NumberFormatException e) {
+                return false;
+            }
 
             return true;
         }

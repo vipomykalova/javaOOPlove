@@ -149,7 +149,7 @@ public class MainApplicationFrame extends JFrame {
         return menuBar;
     }
 
-    public void saveState(JMenu saveMenu) {
+    private void saveState(JMenu saveMenu) {
         gameWindow.getVisualizer().stopTimer();
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setCurrentDirectory(new File("robots//src//saves"));
@@ -172,7 +172,7 @@ public class MainApplicationFrame extends JFrame {
         gameWindow.getVisualizer().setTimer();
     }
 
-    public void loadState(JMenu saveMenu) {
+    private void loadState(JMenu saveMenu) {
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setCurrentDirectory(new File("robots//src//saves"));
         jFileChooser.setFileFilter(new FileNameExtensionFilter("Only text files", "txt"));

@@ -121,7 +121,7 @@ public class GameVisualizer extends JPanel {
         m_targetPositionY = 100;
     }
 
-    public void setPosition(ArrayList<String> gameState) {
+    public void setPosition(ArrayList<String> gameState) throws NumberFormatException{
         m_robotPositionX = Double.parseDouble(gameState.get(0));
         m_robotPositionY = Double.parseDouble(gameState.get(1));
         m_robotDirection = Double.parseDouble(gameState.get(2));

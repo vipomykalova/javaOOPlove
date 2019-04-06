@@ -1,8 +1,11 @@
 package Tests;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import gui.GameWindow;
 import gui.SaveAndLoadGame;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,6 +32,33 @@ public class SaveLoadTests {
         saveLoadManager.setLoadData(game, savedState); //вернули прежнее
 
         assertEquals(game.getVisualizer().getGameState(), currentStateForCheck); //проверили, что всё поменялось
+    }
+
+    @Test
+    void loadNormalStateTest() {
+
+        game.getVisualizer().stopTimer();
+        String normalState = "100.0 100.0 0 150 100 0 0";
+        boolean loadResult = saveLoadManager.setLoadData(game, normalState);
+        assertTrue(loadResult);
+    }
+
+    @Test
+    void loadCorruptedStateTest() {
+
+        game.getVisualizer().stopTimer();
+        String corruptedState = "a b c d e f g";
+        boolean loadResult = saveLoadManager.setLoadData(game, corruptedState);
+        assertFalse(loadResult);
+    }
+
+    @Test
+    void loadNotEnoughDataStateTest() {
+
+        game.getVisualizer().stopTimer();
+        String badState = "100.0 100.0";
+        boolean loadResult = saveLoadManager.setLoadData(game, badState);
+        assertFalse(loadResult);
     }
 
 }
