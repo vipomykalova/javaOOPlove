@@ -1,4 +1,5 @@
 package Tests;
+
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import gui.GameWindow;
 import gui.SaveAndLoadGame;
@@ -35,30 +36,29 @@ public class SaveLoadTests {
     }
 
     @Test
-    void loadNormalStateTest() {
+    void saveAndLoadCorruptedStateTest() {
 
         game.getVisualizer().stopTimer();
-        String normalState = "100.0 100.0 0 150 100 0 0";
-        boolean loadResult = saveLoadManager.setLoadData(game, normalState);
-        assertTrue(loadResult);
+        String savedState = saveLoadManager.getDataForSave(game); //сохранили текущее состояние
+        String[] stateToCorrupt = savedState.split(" ");
+        stateToCorrupt[0] = "a"; //повредили данные
+        String corruptedState = String.join(" ", stateToCorrupt);
+        boolean loadResult = saveLoadManager.setLoadData(game, corruptedState); //пытаемся загрузить
+        assertFalse(loadResult); //Проверяем что модуль отказался загружать поврежденные данные
     }
 
     @Test
-    void loadCorruptedStateTest() {
+    void saveAndLoadNotEnoughDataStateTest() {
 
         game.getVisualizer().stopTimer();
-        String corruptedState = "a b c d e f g";
-        boolean loadResult = saveLoadManager.setLoadData(game, corruptedState);
-        assertFalse(loadResult);
-    }
-
-    @Test
-    void loadNotEnoughDataStateTest() {
-
-        game.getVisualizer().stopTimer();
-        String badState = "100.0 100.0";
-        boolean loadResult = saveLoadManager.setLoadData(game, badState);
-        assertFalse(loadResult);
+        String savedState = saveLoadManager.getDataForSave(game); //сохранили текущее состояние
+        String[] state = savedState.split(" ");
+        String stateWithoutSomeData = "";
+        for (int i = 0; i < state.length - 1; i++) { //симулируем потерю данных
+            stateWithoutSomeData += state[i];
+        }
+        boolean loadResult = saveLoadManager.setLoadData(game, stateWithoutSomeData); // пытаемся загрузить
+        assertFalse(loadResult); 
     }
 
 }
