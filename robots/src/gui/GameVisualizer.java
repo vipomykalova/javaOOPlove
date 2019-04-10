@@ -53,26 +53,7 @@ public class GameVisualizer extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (!isEditor) {
                     setTargetPosition(e.getPoint());
-                    repaint();
-                } else {
-                    if (distance(e.getX(), e.getY(), m_robotPositionX, m_robotPositionY) < 10) {
-                        if (getMouseMotionListeners().length == 0)
-                            addMouseMotionListener(new MouseAdapter() {
-                                @Override
-                                public void mouseMoved(MouseEvent e) {
-                                    m_robotPositionX = e.getX();
-                                    m_robotPositionY = e.getY();
-                                    repaint();
-
-                                }
-                            });
-                        else {
-                            removeMouseMotionListener(getMouseMotionListeners()[0]);
-                        }
-                    }
-                }
             }
         });
         setDoubleBuffered(true);
