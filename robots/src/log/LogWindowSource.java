@@ -10,23 +10,45 @@ import java.util.Collections;
  * 2. Этот класс хранит активные сообщения лога, но в такой реализации он 
  * их лишь накапливает. Надо же, чтобы количество сообщений в логе было ограничено 
  * величиной m_iQueueLength (т.е. реально нужна очередь сообщений 
- * ограниченного размера) 
+ * ограниченного размера)
+ * @author Клепинин
+ * @version 1.0
  */
 public class LogWindowSource
 {
+    /**
+     * переменная обозначающая длину очерди сообщений
+     */
     private int m_iQueueLength;
-    
+    /**
+     * Переменная хранящая все сообщения
+     */
     private ArrayList<LogEntry> m_messages;
+    /**
+     * Переменая хранящая все логи
+     */
     private final ArrayList<LogChangeListener> m_listeners;
+    /**
+     * переменная хранящая все активные логи
+     */
     private volatile LogChangeListener[] m_activeListeners;
-    
+
+    /**
+     * Конструктор класса, создаюший массив логов и массив изменений
+     * @param iQueueLength переданная длина сообщени
+     * @see Logger
+     */
     public LogWindowSource(int iQueueLength) 
     {
         m_iQueueLength = iQueueLength;
         m_messages = new ArrayList<LogEntry>(iQueueLength);
         m_listeners = new ArrayList<LogChangeListener>();
     }
-    
+
+    /**
+     * Метод обновления активных логов
+     * @param listener
+     */
     public void registerListener(LogChangeListener listener)
     {
         synchronized(m_listeners)
@@ -35,16 +57,12 @@ public class LogWindowSource
             m_activeListeners = null;
         }
     }
-    
-    public void unregisterListener(LogChangeListener listener)
-    {
-        synchronized(m_listeners)
-        {
-            m_listeners.remove(listener);
-            m_activeListeners = null;
-        }
-    }
-    
+
+    /**
+     * Метод добавления сообщения логирования
+     * @param logLevel уровень логирования
+     * @param strMessage сообщение логирования
+     */
     public void append(LogLevel logLevel, String strMessage)
     {
         LogEntry entry = new LogEntry(logLevel, strMessage);
@@ -66,22 +84,11 @@ public class LogWindowSource
             listener.onLogChanged();
         }
     }
-    
-    public int size()
-    {
-        return m_messages.size();
-    }
 
-    public Iterable<LogEntry> range(int startFrom, int count)
-    {
-        if (startFrom < 0 || startFrom >= m_messages.size())
-        {
-            return Collections.emptyList();
-        }
-        int indexTo = Math.min(startFrom + count, m_messages.size());
-        return m_messages.subList(startFrom, indexTo);
-    }
-
+    /**
+     * Метод прохода по коллекции сообщений
+     * @return сообщение из колекции
+     */
     public Iterable<LogEntry> all()
     {
         return m_messages;
