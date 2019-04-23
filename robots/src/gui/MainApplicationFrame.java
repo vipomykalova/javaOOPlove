@@ -3,7 +3,6 @@ package gui;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -11,15 +10,23 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import log.Logger;
 
 /**
- * Что требуется сделать:
- * 1. Метод создания меню перегружен функционалом и трудно читается.
- * Следует разделить его на серию более простых методов (или вообще выделить отдельный класс).
+ * Класс, отвечающий за создание главного окна и обеспечивающий взаимодействие всех окон
+ * @author Александр Клепинин, Помыкалова Виктория, Кононский Павел
+ * @version 1.2
+ * @see GameVisualizer
+ * @see GameWindow
  */
-public class MainApplicationFrame extends JFrame {
-    private final JDesktopPane desktopPane = new JDesktopPane();
-    public GameWindow gameWindow;
-    private SaveAndLoadGame saveLoadManager = new SaveAndLoadGame();
 
+public class MainApplicationFrame extends JFrame {
+    /** Главное окно */
+    private final JDesktopPane desktopPane = new JDesktopPane();
+    /** Поле игры */
+    public GameWindow gameWindow;
+    /** Менджер сохранения и загрузки */
+    private SaveAndLoadGame saveLoadManager = new SaveAndLoadGame();
+    /**
+     * Конструктор - создает объект главного окна, закрепляет остальные окна на главное
+     */
     public MainApplicationFrame() {
         //Make the big window be indented 50 pixels from each edge
         //of the screen.
@@ -43,6 +50,11 @@ public class MainApplicationFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+    /**
+     * Метод создает окно для логгирования
+     * @return окно логгирования
+     * @see MainApplicationFrame#MainApplicationFrame()
+     */
     protected LogWindow createLogWindow() {
         LogWindow logWindow = new LogWindow(Logger.getDefaultLogSource());
         logWindow.setLocation(10, 10);
@@ -53,39 +65,20 @@ public class MainApplicationFrame extends JFrame {
         return logWindow;
     }
 
+    /**
+     * Метод добавляет окно на {@link MainApplicationFrame#desktopPane}
+     * @param frame окно, которое следует закрепить на главном окне
+     */
     protected void addWindow(JInternalFrame frame) {
         desktopPane.add(frame);
         frame.setVisible(true);
     }
 
-//    protected JMenuBar createMenuBar() {
-//        JMenuBar menuBar = new JMenuBar();
-//
-//        //Set up the lone menu.
-//        JMenu menu = new JMenu("Document");
-//        menu.setMnemonic(KeyEvent.VK_D);
-//        menuBar.add(menu);
-//
-//        //Set up the first menu item.
-//        JMenuItem menuItem = new JMenuItem("New");
-//        menuItem.setMnemonic(KeyEvent.VK_N);
-//        menuItem.setAccelerator(KeyStroke.getKeyStroke(
-//                KeyEvent.VK_N, ActionEvent.ALT_MASK));
-//        menuItem.setActionCommand("new");
-////        menuItem.addActionListener(this);
-//        menu.add(menuItem);
-//
-//        //Set up the second menu item.
-//        menuItem = new JMenuItem("Quit");
-//        menuItem.setMnemonic(KeyEvent.VK_Q);
-//        menuItem.setAccelerator(KeyStroke.getKeyStroke(
-//                KeyEvent.VK_Q, ActionEvent.ALT_MASK));
-//        menuItem.setActionCommand("quit");
-////        menuItem.addActionListener(this);
-//        menu.add(menuItem);
-//
-//        return menuBar;
-//    }
+    /**
+     * Метод создает Menu Bar с режимами отображения окон, с тестами и с настройками логгирования,
+     * с кнопками сохранить и загрузить
+     * @return Menu Bar в {@link MainApplicationFrame#MainApplicationFrame()}
+     */
 
     private JMenuBar generateMenuBar() {
         JMenuBar menuBar = new JMenuBar();
@@ -149,6 +142,11 @@ public class MainApplicationFrame extends JFrame {
         return menuBar;
     }
 
+    /**
+     * Метод сохраняет состояние игры при нажатии на соответствующую кнопку,
+     * пользователь сам выбирает место и файл для сохранения
+     * @param saveMenu окно, отвечающее за сохранение и загрузку состояния, передается из {@link MainApplicationFrame#generateMenuBar()}
+     */
     private void saveState(JMenu saveMenu) {
         gameWindow.getVisualizer().stopTimer();
         JFileChooser jFileChooser = new JFileChooser();
@@ -172,6 +170,11 @@ public class MainApplicationFrame extends JFrame {
         gameWindow.getVisualizer().setTimer();
     }
 
+    /**
+     * Метод загружает состояние игры при нажатии на соответствующую кнопку,
+     * пользователь сам выбирает место и файл для загрузки
+     * @param saveMenu окно, отвечающее за сохранение и загрузку состояния, передается из {@link MainApplicationFrame#generateMenuBar()}
+     */
     private void loadState(JMenu saveMenu) {
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setCurrentDirectory(new File("robots//src//saves"));
@@ -197,6 +200,10 @@ public class MainApplicationFrame extends JFrame {
         }
     }
 
+    /**
+     * Устанавливает режим отображения окон при нажатии пользователем соответсвующей кнопки
+     * @param className режим отображения, передается из {@link MainApplicationFrame#generateMenuBar()}
+     */
     private void setLookAndFeel(String className) {
         try {
             UIManager.setLookAndFeel(className);

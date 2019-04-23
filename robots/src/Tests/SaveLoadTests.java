@@ -11,10 +11,23 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Тесты на сохранение и загрузку состояния игры
+ * @author Виктория Помыкалова, Кононский Павел
+ * @version 2.0
+ * @see gui.GameVisualizer
+ * @see gui.SaveAndLoadGame
+ */
+
 public class SaveLoadTests {
+    /** Экземпляр игрового поля  */
     private GameWindow game = new GameWindow();
+    /** Менеджер загрузки и сохранения*/
     private SaveAndLoadGame saveLoadManager = new SaveAndLoadGame();
 
+    /**
+     * Проверка корректного сохранения и загрузки состояния игры
+     */
     @Test
     void saveAndLoadNormalStateTest() {
 
@@ -35,6 +48,9 @@ public class SaveLoadTests {
         assertEquals(game.getVisualizer().getGameState(), currentStateForCheck); //проверили, что всё поменялось
     }
 
+    /**
+     * Проверка на то, что программа корректно обработает поврежденные данные для загрузки
+     */
     @Test
     void saveAndLoadCorruptedStateTest() {
 
@@ -47,6 +63,9 @@ public class SaveLoadTests {
         assertFalse(loadResult); //Проверяем что модуль отказался загружать поврежденные данные
     }
 
+    /**
+     * Проверка на то, что программа корректно обработает утечку данных для загрузки
+     */
     @Test
     void saveAndLoadNotEnoughDataStateTest() {
 

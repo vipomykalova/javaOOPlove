@@ -4,9 +4,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import gui.GameVisualizer;
 
-
+/**
+ * Тесты на правильность алгоритма в игровой логике
+ * @author Виктория Помыкалова, Мустафина Екатерина
+ * @version 2.0
+ * @see gui.GameVisualizer
+ */
 public class LogicTest {
+
+    /** Экземпляр игры*/
     private GameVisualizer game = new GameVisualizer();
+
+    /**
+     * Метод тестирует то, что робот не двинется с места, если еда рядом с ним
+     */
     @Test
     void defaultTest(){
         game.m_robotPositionX = 150.8;
@@ -14,6 +25,9 @@ public class LogicTest {
         assertEquals(game.m_robotPositionX, 150.8);
     }
 
+    /**
+     * Метод тестирует то, что робот меняет угол поворота при нахождении еды не на одной прямой с роботом
+     */
     @Test
     void runDirectTest(){
         game.m_robotPositionX = 100;
@@ -25,6 +39,9 @@ public class LogicTest {
         assertEquals(Math.ceil(Math.toDegrees(game.m_robotDirection)), 35);
     }
 
+    /**
+     * Метод тестирует то, что робот движется к еде при нахождении еды не рядом с роботом
+     */
     @Test
     void runNoDirectTest(){
         game.m_robotDirection = 3.1415926;
@@ -35,6 +52,9 @@ public class LogicTest {
         assertEquals(Math.ceil(game.m_robotPositionY), 91);
     }
 
+    /**
+     * Метод тестирует то, что игра закончится при выходе за границы игрового поля
+     */
     @Test
     void runBorderTest(){
         game.currentHeight = 50;
@@ -42,6 +62,9 @@ public class LogicTest {
         assertTrue(game.isRobotAbroad(10, 20, 0.1));
     }
 
+    /**
+     * Метод тестирует то, что игра не закончится, если робот не зайдет за границы игрового поля
+     */
     @Test
     void runNoBorderTest(){
         game.currentHeight = 50;

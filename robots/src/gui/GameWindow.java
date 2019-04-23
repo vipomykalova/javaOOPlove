@@ -5,9 +5,20 @@ import java.awt.BorderLayout;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 
+/**
+ * Класс, создающий окно для игры.
+ * Экземпляр этого класса используется в {@link MainApplicationFrame}, там же и закрепляется за главным окном
+ * @author Александр Клепинин
+ * @version 1.0
+ */
 public class GameWindow extends JInternalFrame
 {
+    /**
+     * Экзмепляр класса игровой логики {@link GameVisualizer}
+     */
     private final GameVisualizer m_visualizer;
+
+    /** Конструктор - создает игровое окно */
     public GameWindow() 
     {
         super("Игровое поле", true, true, true, true);
@@ -18,6 +29,10 @@ public class GameWindow extends JInternalFrame
         pack();
     }
 
+    /**
+     * Публичный метод для возвращения приватного поля текущей игры
+     * @return текущая игра
+     */
     public GameVisualizer getVisualizer(){
         return m_visualizer;
     }
