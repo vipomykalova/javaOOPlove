@@ -2,12 +2,12 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
+import java.util.HashMap;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import log.Logger;
+import hibernate.DatabaseManager;
 
 /**
  * Класс, отвечающий за создание главного окна и обеспечивающий взаимодействие всех окон
@@ -18,12 +18,14 @@ import log.Logger;
  */
 
 public class MainApplicationFrame extends JFrame {
+
+    private HashMap<String, Long> gameStates = new HashMap<String, Long>();
+
+    private volatile DatabaseManager databaseManager = new DatabaseManager();
     /** Главное окно */
     private final JDesktopPane desktopPane = new JDesktopPane();
     /** Поле игры */
     public GameWindow gameWindow;
-    /** Менджер сохранения и загрузки */
-    private SaveAndLoadGame saveLoadManager = new SaveAndLoadGame();
     /**
      * Конструктор - создает объект главного окна, закрепляет остальные окна на главное
      */
@@ -31,13 +33,13 @@ public class MainApplicationFrame extends JFrame {
         //Make the big window be indented 50 pixels from each edge
         //of the screen.
         int inset = 50;
+        databaseManager.loadStatesFromDatabase(gameStates);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setBounds(inset, inset,
                 screenSize.width - inset * 2,
                 screenSize.height - inset * 2);
 
         setContentPane(desktopPane);
-
 
         LogWindow logWindow = createLogWindow();
         addWindow(logWindow);
@@ -124,14 +126,14 @@ public class MainApplicationFrame extends JFrame {
         {
             JMenuItem save = new JMenuItem("Сохранить", KeyEvent.VK_S);
             save.addActionListener((event) -> {
-                saveState(saveMenu);
+                saveState();
             });
             saveMenu.add(save);
         }
         {
             JMenuItem load = new JMenuItem("Загрузить", KeyEvent.VK_S);
             load.addActionListener((event) -> {
-                loadState(saveMenu);
+                loadState();
             });
             saveMenu.add(load);
         }
@@ -145,59 +147,78 @@ public class MainApplicationFrame extends JFrame {
     /**
      * Метод сохраняет состояние игры при нажатии на соответствующую кнопку,
      * пользователь сам выбирает место и файл для сохранения
-     * @param saveMenu окно, отвечающее за сохранение и загрузку состояния, передается из {@link MainApplicationFrame#generateMenuBar()}
      */
-    private void saveState(JMenu saveMenu) {
+    private void saveState() {
+        //databaseManager.addGameState(gameWindow.getVisualizer());
         gameWindow.getVisualizer().stopTimer();
-        JFileChooser jFileChooser = new JFileChooser();
-        jFileChooser.setCurrentDirectory(new File("robots//src//saves"));
-        int ret = jFileChooser.showSaveDialog(saveMenu);
-        if (ret == jFileChooser.APPROVE_OPTION) {
-            try {
-                String FileName = "";
-                if (!jFileChooser.getSelectedFile().toString().endsWith(".txt")){
-                    FileName = jFileChooser.getSelectedFile() + ".txt";
-                }
-                else {
-                    FileName = jFileChooser.getSelectedFile().toString();
-                }
-                String dataForSave = saveLoadManager.getDataForSave(gameWindow);
-                saveLoadManager.saveData(dataForSave, FileName);
-            } catch (IOException e1) {
-                e1.printStackTrace();
+        JInternalFrame saveWindow = new JInternalFrame("Введите название", false, true,false,false);
+        saveWindow.setLocation(420,0);
+        saveWindow.setSize(300, 100);
+
+        JPanel panel = new JPanel(new BorderLayout());
+        JTextField textField = new JTextField();
+        JButton button = new JButton("Сохранить");
+
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String gameName = textField.getText();
+                gameWindow.getVisualizer().nameOfCurrentGame = gameName;
+                Long id = databaseManager.addGameState(gameWindow.getVisualizer());
+                gameStates.put(gameName, id);
+                gameWindow.getVisualizer().setTimer();
+                saveWindow.dispose();
             }
-        }
-        gameWindow.getVisualizer().setTimer();
+        });
+
+        panel.add(button, BorderLayout.SOUTH);
+        panel.add(textField, BorderLayout.NORTH);
+        saveWindow.add(panel);
+        addWindow(saveWindow);
+
     }
 
     /**
      * Метод загружает состояние игры при нажатии на соответствующую кнопку,
      * пользователь сам выбирает место и файл для загрузки
-     * @param saveMenu окно, отвечающее за сохранение и загрузку состояния, передается из {@link MainApplicationFrame#generateMenuBar()}
      */
-    private void loadState(JMenu saveMenu) {
-        JFileChooser jFileChooser = new JFileChooser();
-        jFileChooser.setCurrentDirectory(new File("robots//src//saves"));
-        jFileChooser.setFileFilter(new FileNameExtensionFilter("Only text files", "txt"));
-        int ret = jFileChooser.showOpenDialog(saveMenu);
-        if (ret == jFileChooser.APPROVE_OPTION) {
-            try {
-                File file = jFileChooser.getSelectedFile();
-                String loadState = saveLoadManager.getDataFromSource(file);
-                if (!saveLoadManager.setLoadData(gameWindow, loadState)) {
-                    JOptionPane.showMessageDialog(jFileChooser, "Файл повреждён!",
-                            "Ошибка загрузки", JOptionPane.WARNING_MESSAGE);
-                }
+    private void loadState() {
 
-            } catch (FileNotFoundException e2) {
-                JOptionPane.showMessageDialog(jFileChooser, "Файла с таким именем нет!",
-                        "Ошибка загрузки", JOptionPane.WARNING_MESSAGE);
-            }
-            catch (Exception e1) {
-                JOptionPane.showMessageDialog(jFileChooser, "Файл повреждён!",
-                        "Ошибка загрузки", JOptionPane.WARNING_MESSAGE);
-            }
+        JInternalFrame loadWindow = new JInternalFrame("Выберите одну из игр", false, true,false,false);
+        loadWindow.setLocation(420,0);
+        loadWindow.setSize(300, 100);
+        String[] some = new String[gameStates.size()];
+        int i = 0;
+        for (String el: gameStates.keySet()) {
+            some[i] = el;
+            i++;
         }
+
+        JComboBox comboBox = new JComboBox(some);
+
+        JPanel loadPanel = new JPanel();
+        JButton button = new JButton("Загрузить");
+        loadPanel.setLayout(new BorderLayout());
+        loadPanel.add(comboBox, BorderLayout.NORTH);
+        loadPanel.add(button, BorderLayout.SOUTH);
+        loadWindow.add(loadPanel);
+        addWindow(loadWindow);
+
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String gameName = comboBox.getSelectedItem().toString();
+                GameVisualizer newGame = databaseManager.getGameState(gameStates.get(gameName));
+                gameWindow.setSize((int)newGame.currentWidth, (int)newGame.currentHeight);
+                gameWindow.getVisualizer().m_robotPositionX = newGame.m_robotPositionX;
+                gameWindow.getVisualizer().m_robotPositionY = newGame.m_robotPositionY;
+                gameWindow.getVisualizer().m_robotDirection = newGame.m_robotDirection;
+                gameWindow.getVisualizer().m_targetPositionX = newGame.m_targetPositionX;
+                gameWindow.getVisualizer().m_targetPositionY = newGame.m_targetPositionY;
+                loadWindow.dispose();
+            }
+        });
+
     }
 
     /**

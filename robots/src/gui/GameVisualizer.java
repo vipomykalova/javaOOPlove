@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.persistence.*;
+
 import javax.swing.*;
 
 /**
@@ -18,50 +20,69 @@ import javax.swing.*;
  * @author Клепинин, Помыкалова, Мустафина, Кононских
  * @version 3.0
  */
+@Entity
+@Table(name = "GAME_STATES")
 public class GameVisualizer extends JPanel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
     /**
      * переменная таймер, определяющая время работы
      */
+    @Transient
     private Timer m_timer = initTimer();
-
     /**
      * Статический метод создания таймера
      * @return этот созданый таймер
      */
+
     private static Timer initTimer() {
         Timer timer = new Timer("events generator", true);
         return timer;
     }
 
+    @Column(name = "name_game")
+    public String nameOfCurrentGame;
+
     /**
      * переменная показывающая позицию жука по координате Х
      */
+    @Column(name = "bug_x")
     public volatile double m_robotPositionX;
     /**
      * переменная показывающая позицию жука по координате У
      */
+    @Column(name = "bug_y")
     public volatile double m_robotPositionY;
     /**
-     * переменная показывающая напавление жука
+     * переменная показывающая направление жука
      */
+    @Column(name = "bug_dir")
     public volatile double m_robotDirection;
 
     /**
      * переменная показывающая позицию еды по координате Х
      */
+    @Column(name = "food_x")
     public volatile int m_targetPositionX;
     /**
      * переменная показывающая позицию еды по координате У
      */
+    @Column(name = "food_y")
     public volatile int m_targetPositionY;
 
     /**
      * Переменная обзначающая ширину игрового поля
      */
+    @Column(name = "field_width")
     public volatile double currentWidth;
     /**
      * Переменная обзначающая высоту игрового поля
      */
+    @Column(name = "field_height")
     public volatile double currentHeight;
 
     /**
@@ -130,7 +151,6 @@ public class GameVisualizer extends JPanel {
     /**
      * Метод добавляющий в массив начальное местоположение жука и еды, это необходимо для сохранения
      * @return этот массив
-     * @see SaveAndLoadGame
      */
     public ArrayList<String> getGameState() {
         ArrayList<String> gameState = new ArrayList<String>();
