@@ -46,79 +46,8 @@
     </expand>
     <select />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1981818995">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="9" />
-          <entry key="project.open.time.109" value="1" />
-          <entry key="project.open.time.112" value="1" />
-          <entry key="project.open.time.141" value="1" />
-          <entry key="project.open.time.169" value="1" />
-          <entry key="project.open.time.170" value="1" />
-          <entry key="project.open.time.189" value="1" />
-          <entry key="project.open.time.203" value="1" />
-          <entry key="project.open.time.237" value="1" />
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.open.time.57" value="1" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.open.time.98" value="1" />
-          <entry key="project.opened" value="12" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="classpath" value="1" />
-          <entry key="game_states" value="45" />
-          <entry key="java" value="68" />
-          <entry key="sql" value="5" />
-          <entry key="time_zone_leap_second" value="1" />
-          <entry key="txt" value="9" />
-          <entry key="user" value="1" />
-          <entry key="xml" value="7" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Database Element" value="47" />
-          <entry key="Eclipse" value="1" />
-          <entry key="JAVA" value="68" />
-          <entry key="PLAIN_TEXT" value="9" />
-          <entry key="Scratch" value="5" />
-          <entry key="XML" value="7" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="cell" value="42" />
-          <entry key="dummy" value="1" />
-          <entry key="java" value="10841" />
-          <entry key="txt" value="34" />
-          <entry key="xml" value="87" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="JAVA" value="10841" />
-          <entry key="PLAIN_TEXT" value="35" />
-          <entry key="Scratch" value="42" />
-          <entry key="XML" value="87" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/robots/src/gui/GameVisualizer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="37" lean-forward="true" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -153,10 +82,10 @@
         <option value="$PROJECT_DIR$/robots/src/hibernate/HibernateUtil.java" />
         <option value="$PROJECT_DIR$/robots/src/hibernate/ExmapleStart.java" />
         <option value="$PROJECT_DIR$/robots/src/gui/GameWindow.java" />
-        <option value="$PROJECT_DIR$/robots/src/hibernate/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/robots/src/hibernate/DatabaseManager.java" />
         <option value="$PROJECT_DIR$/robots/src/gui/MainApplicationFrame.java" />
         <option value="$PROJECT_DIR$/robots/src/gui/GameVisualizer.java" />
+        <option value="$PROJECT_DIR$/robots/src/hibernate/hibernate.cfg.xml" />
       </list>
     </option>
   </component>
@@ -172,7 +101,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="9" />
     <option name="y" value="18" />
     <option name="width" value="1347" />
@@ -184,45 +113,52 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="javaOOPlove" type="b2602c69:ProjectViewProjectNode" />
+              <item name="javaOOPlove-master" type="b2602c69:ProjectViewProjectNode" />
               <item name="robots" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="javaOOPlove" type="b2602c69:ProjectViewProjectNode" />
+              <item name="javaOOPlove-master" type="b2602c69:ProjectViewProjectNode" />
               <item name="robots" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="javaOOPlove" type="b2602c69:ProjectViewProjectNode" />
+              <item name="javaOOPlove-master" type="b2602c69:ProjectViewProjectNode" />
               <item name="robots" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="javaOOPlove-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="robots" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="hibernate" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="postgresql&#10;mysql" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557238323880" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/hibernate-annotations.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/robots/lib/txw2-2.3.1.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -286,17 +222,18 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.RobotsProgram" />
-      <item itemvalue="JUnit.SaveLoadTests" />
       <item itemvalue="Application.ExmapleStart" />
+      <item itemvalue="Application.RobotsProgram" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.RobotsProgram" />
         <item itemvalue="Application.ExmapleStart" />
-        <item itemvalue="JUnit.SaveLoadTests" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SQLPlugin.ProjectConfiguration">
+    <queries />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -365,10 +302,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29425114" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.20200951" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -376,9 +312,10 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Persistence" order="7" side_tool="true" />
+      <window_info id="DB Browser" order="8" visible="true" weight="0.32998413" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.4442623" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" visible="true" weight="0.23770492" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.120903954" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -386,11 +323,13 @@
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" weight="0.49836066" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49924356" weight="0.3295082" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50075644" side_tool="true" weight="0.5786885" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.3295082" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5002644" side_tool="true" weight="0.7378531" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32881355" />
       <window_info anchor="bottom" id="Database" order="12" sideWeight="0.49924356" weight="0.49836066" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.452459" />
       <window_info anchor="bottom" id="Database Console" order="14" weight="0.5409836" />
+      <window_info anchor="bottom" id="DB Execution Console" order="15" />
+      <window_info anchor="bottom" id="SQL" order="16" sideWeight="0.4997356" weight="0.7378531" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -401,29 +340,32 @@
       <window_info anchor="right" id="Maven Projects" order="7" weight="0.32980332" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29425114" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="Persistence" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.49836066" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.5360656" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="8" weight="0.49836066" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49924356" weight="0.3295082" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50075644" side_tool="true" weight="0.5786885" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.3295082" />
-      <window_info active="true" anchor="bottom" id="Database" order="12" sideWeight="0.49924356" visible="true" weight="0.50491804" />
-      <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.452459" />
-      <window_info anchor="bottom" id="Database Console" order="14" weight="0.5409836" />
+      <window_info active="true" id="DB Browser" order="0" visible="true" weight="0.32998413" />
+      <window_info content_ui="combo" id="Project" order="1" weight="0.20200951" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Designer" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info id="Persistence" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="DB Execution Console" order="0" />
+      <window_info anchor="bottom" id="SQL" order="1" />
+      <window_info anchor="bottom" id="Message" order="2" />
+      <window_info anchor="bottom" id="Find" order="3" weight="0.4442623" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.49924356" visible="true" weight="0.120903954" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="8" weight="0.5360656" />
+      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="10" weight="0.49836066" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49924356" weight="0.3295082" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50075644" side_tool="true" weight="0.5786885" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.32881355" />
+      <window_info anchor="bottom" id="Database" order="14" sideWeight="0.49924356" weight="0.49836066" />
+      <window_info anchor="bottom" id="Java Enterprise" order="15" weight="0.452459" />
+      <window_info anchor="bottom" id="Database Console" order="16" weight="0.5409836" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -437,9 +379,6 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
@@ -450,16 +389,6 @@
     <entry file="file://$PROJECT_DIR$/robots/src/saves/proba3.txt" />
     <entry file="file://$PROJECT_DIR$/robots/src/saves/kkkkk.txt" />
     <entry file="file://$PROJECT_DIR$/robots/src/saves/test.txt" />
-    <entry file="file://$PROJECT_DIR$/robots/src/Tests/LogicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="74" column="5" lean-forward="true" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/robots/src/package-info.java" />
     <entry file="file://$PROJECT_DIR$/robots/src/log/LogLevel.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -499,34 +428,12 @@
     <entry file="file://$PROJECT_DIR$/robots/.classpath">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/2a7f6a2b-0043-47bc-8cd3-1c8fb87dbd7b/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/2a7f6a2b-0043-47bc-8cd3-1c8fb87dbd7b/console.sql" />
     <entry file="file://$PROJECT_DIR$/robots/src/hibernate/ExampleStart.java" />
-    <entry file="das://41130528-085c-4327-a010-6d263a830245/schema/mysql/table/user">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://41130528-085c-4327-a010-6d263a830245/schema/mysql/table/time_zone_leap_second">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/41130528-085c-4327-a010-6d263a830245/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/robots/src/hibernate/ExmapleStart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="das://41130528-085c-4327-a010-6d263a830245/schema/mysql/table/user" />
+    <entry file="das://41130528-085c-4327-a010-6d263a830245/schema/mysql/table/time_zone_leap_second" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/41130528-085c-4327-a010-6d263a830245/console.sql" />
+    <entry file="file://$PROJECT_DIR$/robots/src/hibernate/ExmapleStart.java" />
     <entry file="file://$PROJECT_DIR$/robots/src/hibernate/HibernateUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -537,40 +444,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/robots/src/hibernate/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="48" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
-          <folding>
-            <element signature="e#511#516#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/robots/src/gui/SaveAndLoadGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://41130528-085c-4327-a010-6d263a830245/schema/mysql/table/game_states">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/robots/src/Tests/SaveLoadTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="21" column="28" lean-forward="true" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/robots/src/gui/SaveAndLoadGame.java" />
+    <entry file="das://41130528-085c-4327-a010-6d263a830245/schema/mysql/table/game_states" />
+    <entry file="file://$PROJECT_DIR$/robots/src/Tests/SaveLoadTests.java" />
     <entry file="file://$PROJECT_DIR$/robots/src/gui/MainApplicationFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-65">
@@ -591,16 +467,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/robots/src/gui/RobotsProgram.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/robots/src/gui/LogWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
@@ -615,10 +481,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/robots/src/Tests/LogicTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/robots/src/hibernate/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="22" column="49" lean-forward="true" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
+          <folding>
+            <element signature="e#511#516#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/robots/src/gui/GameVisualizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="37" lean-forward="true" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
+        <state relative-caret-position="525">
+          <caret line="34" column="14" lean-forward="true" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2617#2745#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2780#2913#0" expanded="true" />
+            <element signature="e#2912#2913#0" expanded="true" />
+            <element signature="e#2949#3117#0" expanded="true" />
+            <element signature="e#3116#3117#0" expanded="true" />
+            <element signature="e#3361#3489#0" expanded="true" />
+            <element signature="e#3488#3489#0" expanded="true" />
+            <element signature="e#3616#3749#0" expanded="true" />
+            <element signature="e#3748#3749#0" expanded="true" />
+            <element signature="e#4007#4015#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/robots/src/gui/RobotsProgram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="db://1de65bf1-6d8e-4803-bb2c-7db5efa730d2/consoles/Connection">
+      <provider selected="true" editor-type-id="0.CONSOLE">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -639,7 +553,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Hibernate</last-edited>
+          <last-edited>Invalid</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -698,6 +612,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>org.junit.jupiter:junit-jupiter:5.5.0-M1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
