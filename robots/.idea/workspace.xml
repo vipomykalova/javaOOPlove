@@ -49,7 +49,57 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/MainApplicationFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="75" column="31" lean-forward="true" selection-start-line="75" selection-start-column="31" selection-end-line="75" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://085ff388-e154-44b0-bbc7-19abd7d3ec9c/schema/mysql/table/game_states">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state projectRestartId="d00d86ee-e7d8-4437-9cbd-b484f0dabf94">
+              <filtering>
+                <filter text="" />
+              </filtering>
+              <column-attributes>
+                <column name="id" enabled="false" position="-1" />
+                <column name="field_height" position="1" />
+                <column name="field_width" position="2" />
+                <column name="bug_dir" position="3" />
+                <column name="bug_x" position="4" />
+                <column name="bug_y" position="5" />
+                <column name="food_x" position="6" />
+                <column name="food_y" position="7" />
+                <column name="name_game" position="8" />
+              </column-attributes>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/gui/GameVisualizer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="386">
+              <caret line="400" column="7" lean-forward="true" selection-start-line="400" selection-start-column="7" selection-end-line="400" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -58,8 +108,9 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/src/hibernate/HibernateUtil.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/085ff388-e154-44b0-bbc7-19abd7d3ec9c/console.sql" />
-        <option value="$PROJECT_DIR$/src/gui/MainApplicationFrame.java" />
         <option value="$PROJECT_DIR$/src/hibernate/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/src/gui/GameVisualizer.java" />
+        <option value="$PROJECT_DIR$/src/gui/MainApplicationFrame.java" />
       </list>
     </option>
   </component>
@@ -75,13 +126,14 @@
     <option name="width" value="1347" />
     <option name="height" value="690" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -93,6 +145,12 @@
               <item name="Robots" type="b2602c69:ProjectViewProjectNode" />
               <item name="robots" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Robots" type="b2602c69:ProjectViewProjectNode" />
+              <item name="robots" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -106,13 +164,15 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/hibernate-commons-annotations-5.1.0.Final.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -183,6 +243,8 @@
       <workItem from="1557392854657" duration="2648000" />
       <workItem from="1557395716392" duration="1262000" />
       <workItem from="1557407504334" duration="15731000" />
+      <workItem from="1557431266976" duration="973000" />
+      <workItem from="1557432301291" duration="2835000" />
     </task>
     <servers />
   </component>
@@ -192,12 +254,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19648000" />
+    <option name="totallyTimeSpent" value="23456000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16917293" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1734694" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="DB Browser" order="2" weight="0.32975295" />
       <window_info id="Designer" order="3" />
@@ -211,7 +273,7 @@
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Messages" order="3" weight="0.4824859" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.3299435" />
-      <window_info anchor="bottom" id="Run" order="5" weight="0.042937852" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.29717514" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -231,11 +293,11 @@
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Maven" order="6" weight="0.32975295" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="right" id="Database" order="8" sideWeight="0.9411765" weight="0.14178303" />
+      <window_info anchor="right" id="Database" order="8" sideWeight="0.9411765" visible="true" weight="0.26476908" />
       <window_info anchor="right" id="Theme Preview" order="9" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.16917293" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1734694" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="DB Browser" order="2" weight="0.32975295" />
       <window_info id="Designer" order="3" />
@@ -247,9 +309,9 @@
       <window_info anchor="bottom" id="Database Console" order="0" weight="0.6158192" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="2" />
-      <window_info anchor="bottom" id="Messages" order="3" weight="0.4824859" />
-      <window_info anchor="bottom" id="Find" order="4" />
-      <window_info anchor="bottom" id="Run" order="5" weight="0.34689265" />
+      <window_info active="true" anchor="bottom" id="Messages" order="3" visible="true" weight="0.4824859" />
+      <window_info anchor="bottom" id="Find" order="4" weight="0.3299435" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.29717514" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -269,7 +331,7 @@
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Maven" order="6" weight="0.32975295" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info active="true" anchor="right" id="Database" order="8" sideWeight="0.9411765" visible="true" weight="0.1621912" />
+      <window_info anchor="right" id="Database" order="8" sideWeight="0.9411765" visible="true" weight="0.26476908" />
       <window_info anchor="right" id="Theme Preview" order="9" />
     </layout-to-restore>
   </component>
@@ -541,16 +603,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/RobotsProgram.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/GameWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -558,20 +610,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/GameVisualizer.java">
+    <entry file="file://$PROJECT_DIR$/src/hibernate/hibernate.cfg.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-316">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="483">
+          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/MainApplicationFrame.java">
+    <entry file="file://$PROJECT_DIR$/src/gui/RobotsProgram.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="57" column="55" lean-forward="true" selection-start-line="57" selection-start-column="55" selection-end-line="57" selection-end-column="55" />
+        <state relative-caret-position="223">
+          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -580,7 +629,7 @@
     </entry>
     <entry file="das://085ff388-e154-44b0-bbc7-19abd7d3ec9c/schema/mysql/table/game_states">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="9abe5ac9-9986-4d3b-b7c5-3a5825b71ea8">
+        <state projectRestartId="d00d86ee-e7d8-4437-9cbd-b484f0dabf94">
           <filtering>
             <filter text="" />
           </filtering>
@@ -598,10 +647,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/hibernate/hibernate.cfg.xml">
+    <entry file="file://$PROJECT_DIR$/src/gui/MainApplicationFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+        <state relative-caret-position="252">
+          <caret line="75" column="31" lean-forward="true" selection-start-line="75" selection-start-column="31" selection-end-line="75" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/GameVisualizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="400" column="7" lean-forward="true" selection-start-line="400" selection-start-column="7" selection-end-line="400" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

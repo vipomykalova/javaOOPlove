@@ -169,7 +169,6 @@ public class GameVisualizer extends JPanel {
      * Метод задающий начальную позицию игры, то есть где находится еда и жук, и напрвавление жука
      */
     protected void setStartPosition() {
-
         m_robotPositionX = 100;
         m_robotPositionY = 100;
         m_robotDirection = 0;
@@ -188,7 +187,6 @@ public class GameVisualizer extends JPanel {
         m_robotDirection = Double.parseDouble(gameState.get(2));
         m_targetPositionX = Integer.parseInt(gameState.get(3));
         m_targetPositionY = Integer.parseInt(gameState.get(4));
-
     }
 
     /**

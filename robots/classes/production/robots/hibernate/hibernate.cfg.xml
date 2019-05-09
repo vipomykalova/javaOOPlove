@@ -21,7 +21,6 @@
 
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
-        <property name="hbm2ddl.auto">create</property>
 
         <!-- Mapping files -->
         <mapping class="gui.GameVisualizer"/>

@@ -153,20 +153,15 @@ public class MainApplicationFrame extends JFrame {
         gameWindow.getVisualizer().stopTimer();
         JInternalFrame saveWindow = new JInternalFrame("Введите название", false, true,false,false);
         saveWindow.setLocation(420,0);
-        saveWindow.setSize(300, 300);
+        saveWindow.setSize(300, 100);
 
         JPanel panel = new JPanel(new BorderLayout());
         JTextField textField = new JTextField();
         JButton button = new JButton("Сохранить");
-
-        DefaultListModel listModel = new DefaultListModel();
-        JList list = new JList(listModel);
-        for(String el: gameStates.keySet()){
-            listModel.addElement(el);
-        }
-        list.setLayoutOrientation(JList.VERTICAL);
-        list.setLocation(420, 95);
-        list.setSize(245, 150);
+        panel.add(textField, BorderLayout.NORTH);
+        panel.add(button, BorderLayout.SOUTH);
+        saveWindow.add(panel);
+        addWindow(saveWindow);
 
         button.addActionListener(new ActionListener() {
             @Override
@@ -174,8 +169,9 @@ public class MainApplicationFrame extends JFrame {
                 String gameName = textField.getText();
                 if (gameName.equals("")) {
                     textField.setText("Введи имя!");
+                } else if (gameStates.keySet().contains(gameName)){
+                    textField.setText("Такое имя уже существует!");
                 } else {
-
                     gameWindow.getVisualizer().nameOfCurrentGame = gameName;
                     Long id = databaseManager.addGameState(gameWindow.getVisualizer());
                     gameStates.put(gameName, id);
@@ -184,13 +180,6 @@ public class MainApplicationFrame extends JFrame {
                 }
             }
         });
-        panel.add(textField, BorderLayout.NORTH);
-        panel.add(new JLabel("Сохранённые игры:"), BorderLayout.BEFORE_LINE_BEGINS);
-        panel.add(new JScrollPane(list), BorderLayout.CENTER);
-        panel.add(button, BorderLayout.SOUTH);
-        saveWindow.add(panel);
-        addWindow(saveWindow);
-
     }
 
     /**
@@ -198,23 +187,22 @@ public class MainApplicationFrame extends JFrame {
      * пользователь сам выбирает место и файл для загрузки
      */
     private void loadState() {
-
         JInternalFrame loadWindow = new JInternalFrame("Выберите одну из игр", false, true,false,false);
         loadWindow.setLocation(420,0);
-        loadWindow.setSize(300, 100);
-        String[] some = new String[gameStates.size()];
-        int i = 0;
-        for (String el: gameStates.keySet()) {
-            some[i] = el;
-            i++;
-        }
-
-        JComboBox comboBox = new JComboBox(some);
+        loadWindow.setSize(300, 300);
 
         JPanel loadPanel = new JPanel();
         JButton button = new JButton("Загрузить");
         loadPanel.setLayout(new BorderLayout());
-        loadPanel.add(comboBox, BorderLayout.NORTH);
+        DefaultListModel listModel = new DefaultListModel();
+        JList jlist = new JList(listModel);
+        for(String el: gameStates.keySet()){
+            listModel.addElement(el);
+        }
+        jlist.setLayoutOrientation(JList.VERTICAL);
+
+        loadPanel.add(new JLabel("Сохранённые игры:"), BorderLayout.NORTH);
+        loadPanel.add(new JScrollPane(jlist), BorderLayout.CENTER);
         loadPanel.add(button, BorderLayout.SOUTH);
         loadWindow.add(loadPanel);
         addWindow(loadWindow);
@@ -222,7 +210,7 @@ public class MainApplicationFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String gameName = comboBox.getSelectedItem().toString();
+                String gameName = jlist.getSelectedValue().toString();
                 GameVisualizer newGame = databaseManager.getGameState(gameStates.get(gameName));
                 gameWindow.setSize((int)newGame.currentWidth, (int)newGame.currentHeight);
                 gameWindow.getVisualizer().m_robotPositionX = newGame.m_robotPositionX;
@@ -230,6 +218,7 @@ public class MainApplicationFrame extends JFrame {
                 gameWindow.getVisualizer().m_robotDirection = newGame.m_robotDirection;
                 gameWindow.getVisualizer().m_targetPositionX = newGame.m_targetPositionX;
                 gameWindow.getVisualizer().m_targetPositionY = newGame.m_targetPositionY;
+
                 loadWindow.dispose();
             }
         });
